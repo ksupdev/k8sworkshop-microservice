@@ -22,7 +22,7 @@ kube-public       Active   58d
 kube-system       Active   58d
 ```
 
-- สร้าง pods ของ nginx ``การสร้าง pod เราจะสร้างผ่าน deployment file `` 
+- สร้าง pods ของ nginx ``การสร้าง pod เราจะสร้างผ่าน deployment file `` (kind: Deployment)
 ```powershell
 kubectl apply -f 01-deployment.yml
 deployment.apps/nginx created
@@ -46,7 +46,7 @@ nginx-86469cbbfd-s64v8   1/1     Running   1          18h
 nginx-86469cbbfd-t55dt   0/1     Running   0          37s
 ```
 
-- ทำการสร้าง service และ check service ที่เราสร้าง
+- ทำการสร้าง service และ check service ที่เราสร้าง โดยเราจะต้องมีการกำหนดด้วยว่า service จะมีการ connect ไปที่ pods ชุดไหน `` คำว่า pods ชุดไหนหมายความว่า pods อาจจะมีการกำหนด replica ได้หลายตัวจึงทำให้เกิดหลาย pod ใน deployment นั้นได้ `` (kind: Service)
 ```powershell
 kubectl apply -f 02-service.yml 
 service/nginx created
@@ -59,7 +59,7 @@ nginx   ClusterIP   10.99.131.165   <none>        8080/TCP,8443/TCP   54s
 
 ```
 
-- ทำการสร้าง Ingress และทำการ check
+- ทำการสร้าง Ingress และทำการ check (kind: Ingress)
 > ingress จะเป็นตัวที่สามารถทำให้เรา access service จากภายนอก cluster ได้
 ```powershell
 
